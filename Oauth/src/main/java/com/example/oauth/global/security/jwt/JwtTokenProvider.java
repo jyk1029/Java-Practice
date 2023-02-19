@@ -1,5 +1,7 @@
 package com.example.oauth.global.security.jwt;
 
+import com.example.oauth.domain.auth.domain.RefreshToken;
+import com.example.oauth.domain.auth.domain.repository.RefreshTokenRepository;
 import com.example.oauth.global.exception.ExpiredJwtException;
 import com.example.oauth.global.exception.InvalidJwtException;
 import com.example.oauth.global.security.auth.AuthDetailsService;
@@ -20,25 +22,42 @@ import java.util.Date;
 public class JwtTokenProvider {
     private final JwtProperties jwtProperties;
     private final AuthDetailsService authDetailsService;
+    private final RefreshTokenRepository refreshTokenRepository;
 
-    public String generateToken(String accountId) {
+    public String generateAccessToken(String email) {
+        return generateToken(email, "access", jwtProperties.getAccessExp());
+    }
+
+    public String generateRefreshToken(String email) {
+        String refreshToken = generateToken(email, "refresh", jwtProperties.getRefreshExp());
+        refreshTokenRepository.save(
+                RefreshToken.builder()
+                .email(email)
+                .token(refreshToken)
+                .timeToLive(jwtProperties.getRefreshExp())
+                .build());
+
+        return refreshToken;
+    }
+
+    public String generateToken(String email, String type, Long exp) {
         return Jwts.builder()
                 .signWith(SignatureAlgorithm.HS256, jwtProperties.getSecretKey())
-                .setSubject(accountId)
-                .setHeaderParam("typ", "access")
+                .setSubject(email)
+                .setHeaderParam("typ", type)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + jwtProperties.getAccessExp() * 1000))
+                .setExpiration(new Date(System.currentTimeMillis() + exp * 1000))
                 .compact();
     }
 
     public String resolveToken(HttpServletRequest request) {
-        String bearer = request.getHeader("Authorization");
+        String bearer = request.getHeader(jwtProperties.getHeader());
         return parseToken(bearer);
     }
 
     public String parseToken(String bearerToken) {
-        if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
-            return bearerToken.replace("Bearer ", "");
+        if (bearerToken != null && bearerToken.startsWith(jwtProperties.getPrefix())) {
+            return bearerToken.replace(jwtProperties.getPrefix(), "");
         }
         return null;
     }
