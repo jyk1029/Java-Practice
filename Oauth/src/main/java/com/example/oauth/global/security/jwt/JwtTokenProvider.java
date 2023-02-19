@@ -30,12 +30,13 @@ public class JwtTokenProvider {
 
     public String generateRefreshToken(String email) {
         String refreshToken = generateToken(email, "refresh", jwtProperties.getRefreshExp());
+        
         refreshTokenRepository.save(
                 RefreshToken.builder()
-                .email(email)
-                .token(refreshToken)
-                .timeToLive(jwtProperties.getRefreshExp())
-                .build());
+                        .email(email)
+                        .token(refreshToken)
+                        .timeToLive(jwtProperties.getRefreshExp())
+                        .build());
 
         return refreshToken;
     }
