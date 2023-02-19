@@ -13,3 +13,10 @@ spring:
 
   jackson:
     property-naming-strategy: SNAKE_CASE
+
+jwt:
+  secret_key: ${JWT_SECRET_KEY}
+  access_exp: ${JWT_ACCESS_EXP}
+  refresh_exp: ${JWT_REFRESH_EXP}
+  header: ${JWT_HEADER}
+  prefix: ${JWT_PREFIX}
