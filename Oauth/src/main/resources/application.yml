@@ -30,6 +30,22 @@ spring:
           scope:
             - email
             - profile
+        kakao:
+          clientId: ${KAKAO_CLIENT_ID}
+          clientSecret: ${KAKAO_CLIENT_SECRET}
+          clientAuthenticationMethod: get
+          authorizationGrantType: authorization_code
+          redirectUri: ${KAKAO_REDIRECT_URL}
+          scope:
+            - profile_nickname
+            - profile_image
+            - account_email
+          clientName: Kakao
+
+      provider:
+        kakao:
+          authorization_uri: https://kauth.kakao.com/oauth/authorize
+          token_uri: https://kauth.kakao.com/oauth/token
 
 jwt:
   secret_key: ${JWT_SECRET_KEY}
