@@ -41,6 +41,12 @@ spring:
             - profile_image
             - account_email
           clientName: Kakao
+        facebook:
+          clientId: ${FACEBOOK_CLIENT_ID}
+          clientSecret: ${FACEBOOK_CLIENT_ID}
+          scope:
+            - email
+            - public_profile
 
       provider:
         kakao:
