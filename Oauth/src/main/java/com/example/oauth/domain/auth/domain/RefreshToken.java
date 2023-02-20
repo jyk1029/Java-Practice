@@ -28,4 +28,9 @@ public class RefreshToken {
         this.token = token;
         this.timeToLive = timeToLive;
     }
+
+    public void updateToken(String token, Long timeToLive) {
+        this.token = token;
+        this.timeToLive = timeToLive;
+    }
 }
