@@ -2,6 +2,7 @@ package com.example.oauth.global.oauth.info;
 
 import com.example.oauth.domain.user.domain.type.ProviderType;
 import com.example.oauth.global.oauth.exception.InvalidProviderTypeException;
+import com.example.oauth.global.oauth.info.impl.FacebookOAuthUserInfo;
 import com.example.oauth.global.oauth.info.impl.GoogleOAuthUserInfo;
 import com.example.oauth.global.oauth.info.impl.KakaoOAuthUserInfo;
 import lombok.AllArgsConstructor;
@@ -17,6 +18,8 @@ public class OAuthUserInfoFactory {
                 return GoogleOAuthUserInfo.ofGoogle(attributes);
             case KAKAO:
                 return KakaoOAuthUserInfo.ofKakao(attributes);
+            case FACEBOOK:
+                return FacebookOAuthUserInfo.ofFacebook(attributes);
             default:
                 throw InvalidProviderTypeException.EXCEPTION;
         }
