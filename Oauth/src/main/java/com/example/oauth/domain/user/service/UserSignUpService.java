@@ -4,6 +4,7 @@ import com.example.oauth.domain.user.controller.dto.request.UserSignUpRequest;
 import com.example.oauth.domain.user.domain.User;
 import com.example.oauth.domain.user.domain.repository.UserRepository;
 import com.example.oauth.domain.user.domain.type.ProviderType;
+import com.example.oauth.domain.user.domain.type.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,7 @@ public class UserSignUpService {
                         .email(request.getEmail())
                         .password(passwordEncoder.encode(request.getPassword()))
                         .name(request.getName())
+                        .role(Role.USER)
                         .providerType(ProviderType.LOCAL)
                         .build());
     }
