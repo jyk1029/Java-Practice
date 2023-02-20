@@ -21,6 +21,16 @@ spring:
   jackson:
     property-naming-strategy: SNAKE_CASE
 
+  security:
+    oauth2.client:
+      registration:
+        google:
+          clientId: ${GOOGLE_CLIENT_ID}
+          clientSecret: ${GOOGLE_CLIENT_SECRET}
+          scope:
+            - email
+            - profile
+
 jwt:
   secret_key: ${JWT_SECRET_KEY}
   access_exp: ${JWT_ACCESS_EXP}
