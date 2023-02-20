@@ -5,6 +5,7 @@ import com.example.oauth.domain.user.domain.User;
 import com.example.oauth.domain.user.domain.repository.UserRepository;
 import com.example.oauth.domain.user.domain.type.ProviderType;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,11 +13,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UserSignUpService {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+
     @Transactional
     public void execute(UserSignUpRequest request) {
         userRepository.save(
                 User.builder()
                         .email(request.getEmail())
+                        .password(passwordEncoder.encode(request.getPassword()))
                         .name(request.getName())
                         .providerType(ProviderType.LOCAL)
                         .build());

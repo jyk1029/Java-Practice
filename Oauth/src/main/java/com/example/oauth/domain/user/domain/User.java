@@ -25,6 +25,9 @@ public class User {
     @Column(length = 64, nullable = false, unique = true)
     private String email;
 
+    @Column(length = 60, nullable = false)
+    private String password;
+
     @Column(length = 5, nullable = false)
     private String name;
 
@@ -33,8 +36,9 @@ public class User {
     private ProviderType providerType;
 
     @Builder
-    public User(String email, String name, ProviderType providerType) {
+    public User(String email, String password, String name, ProviderType providerType) {
         this.email = email;
+        this.password = password;
         this.name = name;
         this.providerType = providerType;
     }

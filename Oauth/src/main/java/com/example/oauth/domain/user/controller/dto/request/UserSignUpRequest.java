@@ -14,6 +14,11 @@ public class UserSignUpRequest {
     @Pattern(regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
     private String email;
 
+    @NotBlank(message = "password는 null, 공백, 띄어쓰기를 할 수 없습니다.")
+    @Pattern(regexp = "(?=.*[a-z])(?=.*[0-9])(?=.*[!/?@])[a-zA-Z0-9!/" + "?@]{8,20}$",
+            message = "password는 소문자, 숫자, 특수문자가 포함되어야 하며 8자 이상 20자 이하여야 합니다.")
+    private String password;
+
     @NotBlank(message = "name은 null, 공백, 띄어쓰기를 할 수 없습니다.")
     @Size(max = 5)
     private String name;
