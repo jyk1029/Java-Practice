@@ -36,6 +36,7 @@ public class SecurityConfig extends WebSecurityConfiguration {
                 .authorizeRequests()
 
                 .antMatchers("*").permitAll()
+                .anyRequest().permitAll()
                 .and()
 
                 .apply(new FilterConfig(objectMapper, jwtTokenProvider))
