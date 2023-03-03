@@ -2,6 +2,9 @@ server:
   port: 9999
 
 spring:
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: ${MYSQL_URL}
@@ -13,10 +16,6 @@ spring:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
       ddl-auto: update
-
-redis:
-  host: ${REDIS_HOST}
-  port: ${REDIS_PORT}
-
-  jackson:
-    property-naming-strategy: SNAKE_CASE
+  redis:
+    host: ${REDIS_HOST}
+    port: ${REDIS_PORT}
