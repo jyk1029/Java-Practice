@@ -1,6 +1,6 @@
 package com.example.oauth.global.security;
 
-import com.example.oauth.global.configuration.FilterConfig;
+import com.example.oauth.global.config.FilterConfig;
 import com.example.oauth.global.security.jwt.JwtTokenProvider;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;

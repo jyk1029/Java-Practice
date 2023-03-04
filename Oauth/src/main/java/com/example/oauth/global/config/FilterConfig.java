@@ -1,4 +1,4 @@
-package com.example.oauth.global.configuration;
+package com.example.oauth.global.config;
 
 import com.example.oauth.global.filter.ExceptionFilter;
 import com.example.oauth.global.security.jwt.JwtTokenFilter;
